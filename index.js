@@ -1,21 +1,50 @@
-/**
- * This is the main entrypoint to your Probot app
- * @param {import('probot').Probot} app
- */
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   index.js                                           :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2021/12/07 16:37:49 by ciglesia          #+#    #+#             //
+//   Updated: 2021/12/07 22:51:28 by ciglesia         ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
+
+const commands = require('probot-commands')
+
+const verify = require('./lib/verify')
+const close = require('./lib/close')
+
+const salut = async (context) => {
+	const pr = context.payload.pull_request;
+	const user = pr.user.login;
+	const msg = context.issue({
+		body: `Hey @${user}, Thanks for the PR !!! You are Awesome.`,
+	});
+	return context.octokit.issues.createComment(msg);
+};
+
+const adieu = async (context) => {
+	const pr = context.payload.pull_request;
+	const user = pr.user.login;
+	const msg = context.issue({
+		body: `Hey @${user}, Thanks for closing the PR !`,
+	});
+	return context.octokit.issues.createComment(msg);
+};
+
 module.exports = (app) => {
-  // Your code here
-  app.log.info("Yay, the app was loaded!");
+	app.log.info("contributor-agreement app loaded!");
 
-  app.on("issues.opened", async (context) => {
-    const issueComment = context.issue({
-      body: "Thanks for opening this issue!",
-    });
-    return context.octokit.issues.createComment(issueComment);
-  });
+	commands(app, 'close', close);
+	commands(app, 'verify', close);
 
-  // For more information on building apps:
-  // https://probot.github.io/docs/
+	app.on("pull_request.opened", salut);
+	app.on("pull_request.reopened", salut);
 
-  // To get your app running against GitHub, see:
-  // https://probot.github.io/docs/development/
+	app.on("pull_request.closed", adieu);
+
+	app.onError(async (error) => {
+		context.log.error(error);
+	});
 };
