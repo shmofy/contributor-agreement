@@ -1,6 +1,6 @@
 # contributor-agreement
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that verifies the contributor agreement that allows to contribute to a Shmofy repository.
+> A GitHub App built with [Probot](https://github.com/probot/probot) that verifies the contributor agreement that allows to contribute to a Shmofy
 
 ## Setup
 

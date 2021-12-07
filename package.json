@@ -2,7 +2,7 @@
   "name": "contributor-agreement",
   "version": "1.0.0",
   "private": true,
-  "description": "verifies the contributor agreement that allows to contribute to a Shmofy repository.",
+  "description": "verifies the contributor agreement that allows to contribute to a Shmofy",
   "author": "AndreIglesias <@AndreIglesias>",
   "license": "ISC",
   "homepage": "https://github.com/AndreIglesias/contributor-agreement",
