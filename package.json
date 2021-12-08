@@ -16,6 +16,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "@octokit/action": "^3.18.0",
+    "github": "^14.0.0",
     "probot": "^11.0.1",
     "probot-commands": "^1.1.0",
     "probot-metadata": "^2.1.0"

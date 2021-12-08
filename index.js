@@ -6,7 +6,7 @@
 //   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2021/12/07 16:37:49 by ciglesia          #+#    #+#             //
-//   Updated: 2021/12/07 22:51:28 by ciglesia         ###   ########.fr       //
+//   Updated: 2021/12/08 02:44:07 by ciglesia         ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -15,13 +15,20 @@ const commands = require('probot-commands')
 const verify = require('./lib/verify')
 const close = require('./lib/close')
 
+async function close_it (context, params) {
+	const closeParams = Object.assign({}, params, {state: 'closed'});
+
+	return context.github.issues.edit(closeParams);
+}
+
 const salut = async (context) => {
 	const pr = context.payload.pull_request;
 	const user = pr.user.login;
 	const msg = context.issue({
 		body: `Hey @${user}, Thanks for the PR !!! You are Awesome.`,
 	});
-	return context.octokit.issues.createComment(msg);
+	context.octokit.issues.createComment(msg);
+	return close_it(context, context.issue());
 };
 
 const adieu = async (context) => {
