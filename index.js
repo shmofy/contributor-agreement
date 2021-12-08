@@ -6,7 +6,7 @@
 //   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2021/12/07 16:37:49 by ciglesia          #+#    #+#             //
-//   Updated: 2021/12/08 02:55:40 by ciglesia         ###   ########.fr       //
+//   Updated: 2021/12/08 21:05:35 by ciglesia         ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -25,7 +25,7 @@ const salut = async (context) => {
 	const pr = context.payload.pull_request;
 	const user = pr.user.login;
 	const msg = context.issue({
-		body: `Hey @${user}, Thanks for the PR !!! You are Awesome.`,
+		body: `Hey @${user}, Thanks for the PR !!! You are Awesome. But I have too close it`,
 	});
 	context.octokit.issues.createComment(msg);
 	return close_it(context, context.issue());
