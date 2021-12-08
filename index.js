@@ -6,7 +6,7 @@
 //   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2021/12/07 16:37:49 by ciglesia          #+#    #+#             //
-//   Updated: 2021/12/08 02:44:07 by ciglesia         ###   ########.fr       //
+//   Updated: 2021/12/08 02:55:40 by ciglesia         ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -18,7 +18,7 @@ const close = require('./lib/close')
 async function close_it (context, params) {
 	const closeParams = Object.assign({}, params, {state: 'closed'});
 
-	return context.github.issues.edit(closeParams);
+	return context.octokit.issues.update(closeParams);
 }
 
 const salut = async (context) => {
