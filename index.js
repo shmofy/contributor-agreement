@@ -6,7 +6,7 @@
 //   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2021/12/07 16:37:49 by ciglesia          #+#    #+#             //
-//   Updated: 2021/12/08 21:05:35 by ciglesia         ###   ########.fr       //
+//   Updated: 2021/12/09 01:19:12 by ciglesia         ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -46,8 +46,9 @@ module.exports = (app) => {
 	commands(app, 'close', close);
 	commands(app, 'verify', close);
 
-	app.on("pull_request.opened", salut);
-	app.on("pull_request.reopened", salut);
+	app.on(["pull_request.opened",
+			"pull_request.reopened",
+			"check_run.rerequested"], salut);
 
 	app.on("pull_request.closed", adieu);
 
